@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
-    "pre-pub": "npm run test && rm -R dist/ && tsc",
+    "create-index": "cti create -n ./src",
+    "prepublish": "npm run create-index && npx rimraf dist/ && tsc",
     "pub": "npm i && git add -A && git commit --amend --no-edit && npm run pre-pub && npm publish"
   },
   "keywords": [],
