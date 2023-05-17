@@ -1,6 +1,6 @@
 {
   "name": "@juandardilag/mongo-repository",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,8 @@
   "dependencies": {
     "@juandardilag/ddd-domain-layer": "^1.0.1",
     "@juandardilag/value-objects": "^1.2.2",
-    "mongodb": "^5.5.0"
+    "mongodb": "^5.5.0",
+    "tslib": "^2.5.0"
   },
   "devDependencies": {
     "@types/jest": "^29.5.1",
