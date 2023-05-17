@@ -6,15 +6,15 @@
   "scripts": {
     "tsc": "tsc",
     "create-index": "cti create -n ./src",
-    "prepublish": "npm run create-index && npx rimraf dist/ && tsc",
-    "pub": "npm i && git add -A && git commit --amend --no-edit && npm run pre-pub && npm publish"
+    "pre-pub": "npm run create-index && npx rimraf dist/ && tsc",
+    "pub": "npm i && git add -A && git commit --amend --no-edit && npm run pre-pub && npm publish --access public"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@juandardilag/ddd-domain-layer": "^1.0.1",
-    "@juandardilag/value-objects": "^1.2.1",
+    "@juandardilag/value-objects": "^1.2.2",
     "mongodb": "^5.5.0"
   },
   "devDependencies": {
