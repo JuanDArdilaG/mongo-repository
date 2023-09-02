@@ -2,6 +2,8 @@ import { MongoClient } from "mongodb";
 import MongoConfig from "./MongoConfig";
 import { UndefinableType } from "@juandardilag/value-objects";
 
+export { MongoClient };
+
 export class MongoClientFactory {
   private static clients: { [key: string]: MongoClient } = {};
 

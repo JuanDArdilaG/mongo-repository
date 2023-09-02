@@ -1,8 +1,8 @@
 {
   "name": "@juandardilag/mongo-repository",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "tsc": "tsc",
     "create-index": "cti create -n ./src",
@@ -14,16 +14,17 @@
   "license": "ISC",
   "dependencies": {
     "@juandardilag/ddd-domain-layer": "^1.0.1",
-    "@juandardilag/value-objects": "^1.2.2",
-    "mongodb": "^5.5.0",
-    "tslib": "^2.5.0"
+    "@juandardilag/value-objects": "^1.2.6",
+    "mongodb": "^6.0.0",
+    "tslib": "^2.6.2"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.1",
-    "@types/node": "^18.16.3",
-    "jest": "^29.5.0",
-    "ts-jest": "^29.1.0",
-    "tslint": "^5.12.1",
-    "typescript": "^5.0.4"
+    "@types/jest": "^29.5.4",
+    "@types/node": "^20.5.8",
+    "create-ts-index": "^1.14.0",
+    "jest": "^29.6.4",
+    "ts-jest": "^29.1.1",
+    "tslint": "^5.20.1",
+    "typescript": "^5.2.2"
   }
 }
