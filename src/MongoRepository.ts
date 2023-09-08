@@ -25,14 +25,15 @@ export abstract class MongoRepository<T extends AggregateRoot>
     }) as T[];
   }
 
-  async getByID(id: IIdentifier): Promise<T> {
+  async getByID(id: IIdentifier<string>): Promise<T> {
     const collection = await this.collection();
     const document = await collection.findOne({
-      _id: ObjectId.createFromBase64(id.value),
+      _id: ObjectId.createFromBase64(id.valueOf()),
     });
     if (!document) {
       throw new Error(
-        `${typeof this._example} document with id ${id.value} doesn't exists.`
+        `${typeof this
+          ._example} document with id ${id.valueOf()} doesn't exists.`
       );
     }
     return this._example.fromPrimitives(document) as T;
@@ -42,7 +43,7 @@ export abstract class MongoRepository<T extends AggregateRoot>
     const collection = await this.collection();
     const document = {
       ...aggregateRoot.toPrimitives(),
-      _id: aggregateRoot.id.value,
+      _id: aggregateRoot.id.valueOf(),
     };
     delete document.id;
     const res = await collection.insertOne(document);
@@ -56,12 +57,12 @@ export abstract class MongoRepository<T extends AggregateRoot>
     const collection = await this.collection();
     const document = {
       ...aggregateRoot.toPrimitives(),
-      _id: aggregateRoot.id.value,
+      _id: aggregateRoot.id.valueOf(),
     };
     delete document.id;
 
     await collection.updateOne(
-      { _id: ObjectId.createFromBase64(aggregateRoot.id.value) },
+      { _id: ObjectId.createFromBase64(aggregateRoot.id.valueOf()) },
       { $set: document },
       { upsert: false }
     );
