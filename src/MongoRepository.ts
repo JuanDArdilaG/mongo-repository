@@ -1,7 +1,6 @@
 import { Collection, MongoClient, ObjectId } from "mongodb";
 import { Repository } from "./IMongoRepository";
-import { IIdentifier } from "@juandardilag/value-objects";
-import { AggregateRoot } from "@juandardilag/ddd-domain-layer";
+import { AggregateRoot, IIdentifier } from "@juandardilag/value-objects";
 
 export abstract class MongoRepository<T extends AggregateRoot>
   implements Repository<T>

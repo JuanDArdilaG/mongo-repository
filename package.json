@@ -1,6 +1,6 @@
 {
   "name": "@juandardilag/mongo-repository",
-  "version": "1.1.0-alpha.2",
+  "version": "1.1.0-alpha.3",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@juandardilag/ddd-domain-layer": "^1.1.0-alpha.3",
+    "@juandardilag/ddd-domain-layer": "^1.1.0-alpha.4",
     "@juandardilag/value-objects": "^1.3.0-alpha.9",
     "mongodb": "^6.0.0",
     "tslib": "^2.6.2"
