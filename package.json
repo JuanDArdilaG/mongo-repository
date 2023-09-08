@@ -7,7 +7,7 @@
     "tsc": "tsc",
     "create-index": "cti create -n ./src",
     "pre-pub": "npm run create-index && npx rimraf dist/ && tsc",
-    "pub": "npm i && git add -A && git commit --amend --no-edit && npm run pre-pub && npm publish --access public"
+    "pub": "npm i && git add -A && git commit --amend --no-edit && npm run pre-pub && git push origin master && npm publish --access public"
   },
   "keywords": [],
   "author": "",
