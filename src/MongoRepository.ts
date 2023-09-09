@@ -1,6 +1,6 @@
 import { Collection, MongoClient, ObjectId } from "mongodb";
-import { Repository } from "./IMongoRepository";
 import { AggregateRoot, IIdentifier } from "@juandardilag/value-objects";
+import { Repository } from "@juandardilag/ddd-domain-layer";
 
 export abstract class MongoRepository<T extends AggregateRoot>
   implements Repository<T>
@@ -38,11 +38,11 @@ export abstract class MongoRepository<T extends AggregateRoot>
     return this._example.fromPrimitives(document) as T;
   }
 
-  async persist(aggregateRoot: T): Promise<void> {
+  async persist(item: T): Promise<void> {
     const collection = await this.collection();
     const document = {
-      ...aggregateRoot.toPrimitives(),
-      _id: aggregateRoot.id.valueOf(),
+      ...item.toPrimitives(),
+      _id: item.id.valueOf(),
     };
     delete document.id;
     const res = await collection.insertOne(document);
@@ -52,18 +52,25 @@ export abstract class MongoRepository<T extends AggregateRoot>
     throw new Error("error persisting in db");
   }
 
-  async updateOne(aggregateRoot: T): Promise<void> {
+  async updateOne(item: T): Promise<void> {
     const collection = await this.collection();
     const document = {
-      ...aggregateRoot.toPrimitives(),
-      _id: aggregateRoot.id.valueOf(),
+      ...item.toPrimitives(),
+      _id: item.id.valueOf(),
     };
     delete document.id;
 
     await collection.updateOne(
-      { _id: ObjectId.createFromBase64(aggregateRoot.id.valueOf()) },
+      { _id: ObjectId.createFromBase64(item.id.valueOf()) },
       { $set: document },
       { upsert: false }
     );
+  }
+
+  async deleteOne(item: T): Promise<void> {
+    const collection = await this.collection();
+    await collection.deleteOne({
+      _id: ObjectId.createFromBase64(item.id.valueOf()),
+    });
   }
 }
