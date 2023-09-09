@@ -1,5 +1,5 @@
 import { Collection, MongoClient, ObjectId } from "mongodb";
-import { AggregateRoot, IIdentifier } from "@juandardilag/value-objects";
+import { AggregateRoot, Identifier } from "@juandardilag/value-objects";
 import { Repository } from "@juandardilag/ddd-domain-layer";
 
 export abstract class MongoRepository<T extends AggregateRoot>
@@ -24,7 +24,7 @@ export abstract class MongoRepository<T extends AggregateRoot>
     }) as T[];
   }
 
-  async getByID(id: IIdentifier<string>): Promise<T> {
+  async getByID(id: Identifier<string>): Promise<T> {
     const collection = await this.collection();
     const document = await collection.findOne({
       _id: ObjectId.createFromBase64(id.valueOf()),
