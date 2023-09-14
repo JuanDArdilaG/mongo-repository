@@ -1,0 +1,14 @@
+{
+  "folders": [
+	{
+		"path": "."
+	},
+	{
+		"path": "../ddd-domain-layer"
+	},
+	{
+		"path": "../value-objects"
+	}
+],
+  "settings": {}
+}
