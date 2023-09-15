@@ -1,0 +1,12 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "pub",
+      "problemMatcher": [],
+      "label": "npm: pub",
+      "detail": "npm i && git add -A && git commit --amend --no-edit && npm run pre-pub && git push && npm publish --access public"
+    }
+  ]
+}

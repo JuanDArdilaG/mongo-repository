@@ -1,14 +1,19 @@
 {
   "folders": [
-	{
-		"path": "."
-	},
-	{
-		"path": "../ddd-domain-layer"
-	},
-	{
-		"path": "../value-objects"
-	}
-],
-  "settings": {}
+    {
+      "path": "."
+    },
+    {
+      "path": "../ddd-domain-layer"
+    },
+    {
+      "path": "../value-objects"
+    },
+    {
+      "path": "../cqrs"
+    }
+  ],
+  "settings": {
+    "jest.disabledWorkspaceFolders": ["cqrs"]
+  }
 }
