@@ -1,13 +1,13 @@
 {
   "name": "@juandardilag/mongo-repository",
-  "version": "1.1.0-alpha.7",
+  "version": "1.1.0-alpha.8",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
     "tsc": "tsc",
     "create-index": "cti create -n ./src",
     "pre-pub": "npm run create-index && npx rimraf dist/ && tsc",
-    "pub": "npm i && git add -A && git commit --amend --no-edit && npm run pre-pub && git push && npm publish --access public"
+    "pub": "npm i && git add -A && git commit --amend --no-edit && npm run pre-pub && npm publish --access public && git push"
   },
   "keywords": [],
   "author": "",
