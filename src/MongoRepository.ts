@@ -42,7 +42,6 @@ export abstract class MongoRepository<T extends AggregateRoot>
     const collection = await this.collection();
     const document = {
       ...item.toPrimitives(),
-      _id: item.id.valueOf(),
     };
     delete document.id;
     const res = await collection.insertOne(document);
