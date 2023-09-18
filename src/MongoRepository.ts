@@ -24,12 +24,17 @@ export abstract class MongoRepository<T extends AggregateRoot>
     }) as T[];
   }
 
-  async getBy(key: string, value: any): Promise<T[]> {
+  async getBy(key: string, value: any): Promise<T> {
     const collection = await this.collection();
-    const documents = await collection.find({ [key]: value }).toArray();
-    return documents.map((prim) => {
-      return this._example.fromPrimitives(prim);
-    }) as T[];
+    const document = await collection.findOne({ [key]: value });
+    if (!document) {
+      throw new Error(
+        `${typeof this._example} document with ${key} ${String(
+          value
+        )} doesn't exists.`
+      );
+    }
+    return this._example.fromPrimitives(document) as T;
   }
 
   async getByID(id: Identifier<string>): Promise<T> {
