@@ -37,7 +37,7 @@ export abstract class MongoRepository<T extends AggregateRoot>
     return this._example.fromPrimitives(document) as T;
   }
 
-  async getByID(id: Identifier<string>): Promise<T> {
+  async getByDocID(id: Identifier<string>): Promise<T> {
     const collection = await this.collection();
     const document = await collection.findOne({
       _id: ObjectId.createFromBase64(id.valueOf()),
@@ -49,6 +49,10 @@ export abstract class MongoRepository<T extends AggregateRoot>
       );
     }
     return this._example.fromPrimitives(document) as T;
+  }
+
+  async getByID(id: Identifier<string>): Promise<T> {
+    return this.getBy("id", id.valueOf());
   }
 
   async persist(item: T): Promise<void> {
