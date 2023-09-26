@@ -51,7 +51,7 @@ export abstract class MongoRepository<T extends AggregateRoot>
     return this._example.fromPrimitives(document) as T;
   }
 
-  async getByID(id: Identifier<string>): Promise<T> {
+  async get(id: Identifier<string>): Promise<T> {
     return this.getBy("id", id.valueOf());
   }
 
@@ -82,10 +82,10 @@ export abstract class MongoRepository<T extends AggregateRoot>
     );
   }
 
-  async deleteOne(item: T): Promise<void> {
+  async deleteOne(id: Identifier<string>): Promise<void> {
     const collection = await this.collection();
     await collection.deleteOne({
-      _id: ObjectId.createFromBase64(item.id.valueOf()),
+      _id: ObjectId.createFromBase64(id.valueOf()),
     });
   }
 }
