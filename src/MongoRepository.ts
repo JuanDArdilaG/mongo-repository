@@ -5,7 +5,7 @@ import { Repository } from "@juandardilag/ddd-domain-layer";
 export abstract class MongoRepository<T extends AggregateRoot>
   implements Repository<T>
 {
-  constructor(private _client: Promise<MongoClient>, private _example: T) {}
+  constructor(private _client: Promise<MongoClient>, protected _example: T) {}
 
   protected abstract moduleName(): string;
 
