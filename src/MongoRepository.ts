@@ -71,12 +71,11 @@ export abstract class MongoRepository<T extends AggregateRoot>
     const collection = await this.collection();
     const document = {
       ...item.toPrimitives(),
-      _id: item.id.valueOf(),
     };
     delete document.id;
 
     await collection.updateOne(
-      { _id: ObjectId.createFromBase64(item.id.valueOf()) },
+      { id: item.id.valueOf() },
       { $set: document },
       { upsert: false }
     );
@@ -85,7 +84,7 @@ export abstract class MongoRepository<T extends AggregateRoot>
   async deleteOne(id: Identifier<string>): Promise<void> {
     const collection = await this.collection();
     await collection.deleteOne({
-      _id: ObjectId.createFromBase64(id.valueOf()),
+      id: id.valueOf(),
     });
   }
 }
