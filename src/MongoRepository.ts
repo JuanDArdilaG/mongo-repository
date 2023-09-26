@@ -1,6 +1,7 @@
 import { Collection, MongoClient, ObjectId } from "mongodb";
 import { AggregateRoot, Identifier } from "@juandardilag/value-objects";
 import { Repository } from "@juandardilag/ddd-domain-layer";
+import { ItemNotFoundException } from "./exceptions/ItemNotFoundException";
 
 export abstract class MongoRepository<T extends AggregateRoot>
   implements Repository<T>
@@ -28,10 +29,10 @@ export abstract class MongoRepository<T extends AggregateRoot>
     const collection = await this.collection();
     const document = await collection.findOne({ [key]: value });
     if (!document) {
-      throw new Error(
-        `${typeof this._example} document with ${key} ${String(
-          value
-        )} doesn't exists.`
+      throw new ItemNotFoundException(
+        this._example.constructor.name,
+        key,
+        value
       );
     }
     return this._example.fromPrimitives(document) as T;
@@ -43,9 +44,10 @@ export abstract class MongoRepository<T extends AggregateRoot>
       _id: ObjectId.createFromBase64(id.valueOf()),
     });
     if (!document) {
-      throw new Error(
-        `${typeof this
-          ._example} document with id ${id.valueOf()} doesn't exists.`
+      throw new ItemNotFoundException(
+        this._example.constructor.name,
+        "id",
+        id.valueOf()
       );
     }
     return this._example.fromPrimitives(document) as T;
