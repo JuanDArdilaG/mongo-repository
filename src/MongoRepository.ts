@@ -1,7 +1,9 @@
 import { Collection, MongoClient, ObjectId } from "mongodb";
 import { AggregateRoot, Identifier } from "@juandardilag/value-objects";
-import { Repository } from "@juandardilag/ddd-domain-layer";
-import { ItemNotFoundException } from "./exceptions/ItemNotFoundException";
+import {
+  ItemNotFoundException,
+  Repository,
+} from "@juandardilag/ddd-domain-layer";
 
 export abstract class MongoRepository<T extends AggregateRoot>
   implements Repository<T>
@@ -76,17 +78,32 @@ export abstract class MongoRepository<T extends AggregateRoot>
     };
     delete document.id;
 
-    await collection.updateOne(
+    const res = await collection.updateOne(
       { id: item.id.valueOf() },
       { $set: document },
       { upsert: false }
     );
+
+    if (!res.matchedCount) {
+      throw new ItemNotFoundException(
+        item.constructor.name,
+        "id",
+        item.id.valueOf()
+      );
+    }
   }
 
   async deleteOne(id: Identifier<string>): Promise<void> {
     const collection = await this.collection();
-    await collection.deleteOne({
+    const res = await collection.deleteOne({
       id: id.valueOf(),
     });
+    if (!res.deletedCount) {
+      throw new ItemNotFoundException(
+        this._example.constructor.name,
+        "id",
+        id.valueOf()
+      );
+    }
   }
 }
